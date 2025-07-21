@@ -6,7 +6,7 @@ import os from 'os';
 
 // Using environment variables for the backend endpoint
 // const BACKEND_DOC_ENDPOINT = process.env.BACKEND_DOC_ENDPOINT || 'http://localhost:8081/doc';
-const BACKEND_DOC_ENDPOINT = process.env.BACKEND_DOC_ENDPOINT!;
+const UPLOAD_DOCS_URL = process.env.UPLOAD_DOCS_URL!;
 
 export async function POST(request: Request) {
   console.log('Received document upload request');
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
 
     // Send the file details to the backend service
     try {
-      const response = await fetch(BACKEND_DOC_ENDPOINT, {
+      const response = await fetch(UPLOAD_DOCS_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
