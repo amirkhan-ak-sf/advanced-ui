@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { LLMSettings } from "@/types/types";
 
 interface VoiceRecorderProps {
-  onRecordingComplete: (audioBlob: Blob) => void;
+  onRecordingComplete: (result: import("@/types/types").QueryResult) => void;
   isRecording: boolean;
   onRecordingStop: () => void;
   maxDuration: number;

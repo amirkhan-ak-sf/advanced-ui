@@ -242,10 +242,11 @@ export default function QueryStore({
             attributes: {
               additionalAttributes: {
                 getLatest: "",
-                question: "",
-                storeName: "",
+                question: prompt,
+                storeName: selectedStore,
               },
             },
+            question: prompt,
           },
         },
       ]);
@@ -256,7 +257,7 @@ export default function QueryStore({
         response
       );
     },
-    [messages]
+    [messages, prompt, selectedStore]
   );
 
   // Memoize onRecordingStop to prevent function reference changes
@@ -301,10 +302,11 @@ export default function QueryStore({
           attributes: {
             additionalAttributes: {
               getLatest: "",
-              question: "",
-              storeName: "",
+              question: prompt,
+              storeName: selectedStore,
             },
           },
+          question: prompt,
         },
       },
     ]);
