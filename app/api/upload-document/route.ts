@@ -46,7 +46,7 @@ export async function POST(request: Request) {
           'Content-Type': 'application/json',
         },
         //body: JSON.stringify({ storeName, filePath, fileType }),
-        body: JSON.stringify({ storeName, base64Data, fileExt }),
+        body: JSON.stringify({ storeName, base64Data, fileExt, fileName }),
         signal: controller.signal,
       });
 
