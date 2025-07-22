@@ -16,6 +16,9 @@ export async function POST(request: Request) {
     const { storeName, fileName, fileContent, fileType } = await request.json();
     console.log(`Received upload request for store: ${storeName}, fileName: ${fileName}, fileType: ${fileType}`);
 
+    const parts = fileName.split('.');
+    const fileExt = parts.length > 1 ? parts.pop().toLowerCase() : '';
+  
     // Decode base64 content (assuming the content is in "data:;base64," format)
     const base64Data = fileContent.split(',')[1];
     if (!base64Data) {
@@ -42,7 +45,8 @@ export async function POST(request: Request) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ storeName, filePath, fileType }),
+        //body: JSON.stringify({ storeName, filePath, fileType }),
+        body: JSON.stringify({ storeName, base64Data, fileExt }),
         signal: controller.signal,
       });
 
