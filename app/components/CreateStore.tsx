@@ -23,7 +23,7 @@ export default function CreateStore({
     if (name.trim().length < 3) {
       return "Store name must be at least 3 characters long.";
     }
-    if (name.trim().length > 15) {
+    if (name.trim().length > 50) {
       return "Store name must not exceed 50 characters.";
     }
     if (!/^[a-zA-Z0-9\s]+$/.test(name)) {
