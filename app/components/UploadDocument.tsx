@@ -22,6 +22,8 @@ export default function UploadDocument({
   const [inputErrors, setInputErrors] = useState({
     selectedStore: "",
     file: "",
+    fileSize: "", // New error type
+    fileType: "", // New error type for file type
   });
 
   // Util function to read the file as Base64
@@ -72,6 +74,8 @@ export default function UploadDocument({
     const errors = {
       selectedStore: "",
       file: "",
+      fileSize: "", // New error type
+      fileType: "", // New error type for file type
     };
 
     if (!selectedStore) {
@@ -82,6 +86,17 @@ export default function UploadDocument({
     if (!file) {
       errors.file = "Please select a file to upload.";
       hasError = true;
+    } else {
+      if (file.size > 5 * 1024 * 1024) { // 5MB in bytes
+        errors.fileSize = "File size must be 5MB or less. Please select a smaller file.";
+        hasError = true;
+      }
+      // Check if file is a PDF
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      if (fileExtension !== 'pdf') {
+        errors.fileType = "Only PDF files are allowed. Please select a PDF file.";
+        hasError = true;
+      }
     }
 
     setInputErrors(errors);
@@ -204,6 +219,12 @@ export default function UploadDocument({
         </div>
         {inputErrors.file && (
           <p className="text-sm text-red-400 mt-1">{inputErrors.file}</p>
+        )}
+        {inputErrors.fileSize && (
+          <p className="text-sm text-red-400 mt-1">{inputErrors.fileSize}</p>
+        )}
+        {inputErrors.fileType && (
+          <p className="text-sm text-red-400 mt-1">{inputErrors.fileType}</p>
         )}
 
         {/* Upload Button */}
